@@ -16,3 +16,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/greeting', function(){
+    return 'Hello World';
+});
+
+Route::get('greeting/{name}', function($name){
+    return 'Hello ' . $name;
+});
+
+Route::get('/hiYou',function(){
+    return redirect('/greeting');
+});
+
+Route::get('hi2', function(){
+    return redirect() ->route('greeting'); //redirect to route name greeting
+});
+
+Route::get('home', function(){
+    return view('/');
+});
+
