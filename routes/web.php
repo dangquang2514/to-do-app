@@ -1,39 +1,14 @@
 <?php
-
+use App\Models\Task;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function (){
+    $tasks = Task::latest('title')->get();
+    return view('index', ['tasks' => $tasks]);
 });
 
-Route::get('/greeting', function(){
-    return 'Hello World';
-});
+Route::get('/tasks/{id}', function ($id){
+    $task = Task::findOrFail($id);
+    return view('details' , ['task' => $task]);
+})->name('tasks.detail');
 
-Route::get('greeting/{name}', function($name){
-    return 'Hello ' . $name;
-});
-
-Route::get('/hiYou',function(){
-    return redirect('/greeting');
-});
-
-Route::get('hi2', function(){
-    return redirect() ->route('greeting'); //redirect to route name greeting
-});
-
-Route::get('home', function(){
-    return view('/');
-});
 
