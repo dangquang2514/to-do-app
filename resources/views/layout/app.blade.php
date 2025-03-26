@@ -7,20 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
 </head>
-    <style>
-        @yield('style')
-        .alert.success {
-            color: green;
-        }
-    </style>
+<style>
+    @yield('style')
+
+    .alert.success {
+        color: green;
+    }
+</style>
+
 <body>
     <h1>@yield('title')</h1>
 
     @if (session()->has('success'))
         <div class="alert success">{{ session('success') }}</div>
+    @endif
     @yield('content')
 
-    @endif
 </body>
 
 </html>
